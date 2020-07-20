@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 
 import { Input, Button } from 'components'
@@ -20,23 +20,26 @@ const Form = styled.form`
     align-items: center;
 `
 
-const CreateStage: React.FC<CreateStage> = (props) => {
-    const { value, error, handleSubmit, onChange } = props
+const CreateStage = forwardRef<HTMLInputElement, CreateStage>(
+    (props, ref: React.Ref<HTMLInputElement>) => {
+        const { value, error, handleSubmit, onChange } = props
 
-    return (
-        <Wrapper>
-            <Form onSubmit={handleSubmit}>
-                <Input
-                    label="Type your name:"
-                    name="userName"
-                    value={value}
-                    onChange={onChange}
-                    error={error}
-                />
-                <Button type="submit">Submit</Button>
-            </Form>
-        </Wrapper>
-    )
-}
+        return (
+            <Wrapper>
+                <Form onSubmit={handleSubmit}>
+                    <Input
+                        ref={ref}
+                        label="Type your name:"
+                        name="userName"
+                        value={value}
+                        onChange={onChange}
+                        error={error}
+                    />
+                    <Button type="submit">Submit</Button>
+                </Form>
+            </Wrapper>
+        )
+    }
+)
 
 export default CreateStage

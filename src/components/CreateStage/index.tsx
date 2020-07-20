@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+
 import CreateStage from './CreateStage'
+
+import createGame from 'store/game/createGame'
 import { userNameLocalStorage } from 'utils/localStorage'
 
 interface Form {
@@ -15,24 +19,31 @@ const validationSchema = yup.object({
 const initialValues = { userName: '' }
 
 const CreateStageContainer = () => {
-    const onSubmit = () => {
-        console.log('submitted')
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    const dispatch = useDispatch()
+    const onSubmit = (values: Form) => {
+        dispatch(createGame(values.userName))
     }
 
     const formik = useFormik<Form>({
         initialValues,
         validationSchema,
         onSubmit,
+        validateOnMount: false,
     })
     const { values, errors, setFieldValue, handleSubmit, handleChange } = formik
 
     useEffect(() => {
         const rememberedName = userNameLocalStorage.get()
-        rememberedName && setFieldValue(rememberedName, 'userName')
+        rememberedName && setFieldValue('userName', rememberedName)
+
+        inputRef.current?.focus()
     }, [])
 
     return (
         <CreateStage
+            ref={inputRef}
             value={values.userName}
             error={errors.userName}
             handleSubmit={handleSubmit}

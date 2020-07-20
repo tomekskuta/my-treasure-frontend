@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -46,28 +46,35 @@ const StyledError = styled(motion.p)`
     bottom: 0;
 `
 
-const Input: React.FC<Input> = (props) => {
-    const { label, name, value, error, onChange } = props
+const Input = forwardRef<HTMLInputElement, Input>(
+    (props, ref?: React.Ref<HTMLInputElement>) => {
+        const { label, name, value, error, onChange } = props
 
-    return (
-        <Wrapper>
-            <Label>{label}</Label>
-            <StyledInput name={name} value={value} onChange={onChange} />
-            <AnimatePresence>
-                {error && (
-                    <StyledError
-                        key="error-label"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        {error}
-                    </StyledError>
-                )}
-            </AnimatePresence>
-        </Wrapper>
-    )
-}
+        return (
+            <Wrapper>
+                <Label>{label}</Label>
+                <StyledInput
+                    ref={ref}
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                />
+                <AnimatePresence>
+                    {error && (
+                        <StyledError
+                            key="error-label"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            {error}
+                        </StyledError>
+                    )}
+                </AnimatePresence>
+            </Wrapper>
+        )
+    }
+)
 
 export default Input

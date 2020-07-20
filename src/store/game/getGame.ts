@@ -20,8 +20,9 @@ const getGameAction = createAsyncThunk(
         }
 
         try {
-            const response = await getGame(gameId)
-            return response.data
+            const { data } = await getGame(gameId)
+            data.id && dispatch(setStage('play'))
+            return data
         } catch (error) {
             return throwError()
         }
