@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
@@ -20,6 +20,8 @@ const initialValues = { userName: '' }
 
 const CreateStageContainer = () => {
     const inputRef = useRef<HTMLInputElement>(null)
+
+    const loading = useSelector((state) => state.game.loading)
 
     const dispatch = useDispatch()
     const onSubmit = (values: Form) => {
@@ -44,6 +46,7 @@ const CreateStageContainer = () => {
     return (
         <CreateStage
             ref={inputRef}
+            loading={loading}
             value={values.userName}
             error={errors.userName}
             handleSubmit={handleSubmit}

@@ -1,4 +1,5 @@
 export { default as Layout } from './Layout'
+export { default as Loader } from './Loader'
 export { default as InitStage } from './InitStage'
 export { default as CreateStage } from './CreateStage'
 export { default as PlayStage } from './PlayStage'

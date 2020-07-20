@@ -1,9 +1,10 @@
 import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 
-import { Input, Button } from 'components'
+import { Input, Button, Loader } from 'components'
 
 interface CreateStage {
+    loading: boolean
     value: string
     error?: string
     handleSubmit: () => void
@@ -22,10 +23,11 @@ const Form = styled.form`
 
 const CreateStage = forwardRef<HTMLInputElement, CreateStage>(
     (props, ref: React.Ref<HTMLInputElement>) => {
-        const { value, error, handleSubmit, onChange } = props
+        const { loading, value, error, handleSubmit, onChange } = props
 
         return (
             <Wrapper>
+                {loading && <Loader />}
                 <Form onSubmit={handleSubmit}>
                     <Input
                         ref={ref}
