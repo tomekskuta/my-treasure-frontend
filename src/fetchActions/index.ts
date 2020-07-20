@@ -1,6 +1,6 @@
 import axios, { AxiosPromise, Method } from 'axios'
 
-interface UpdateGameParams {
+export interface UpdateGameParams {
     id: string
     revealedFields: Coordinates[]
 }
@@ -21,14 +21,16 @@ const genericAction = <R extends object>(
     axios({
         ...params,
         headers: { Accept: 'application/json' },
-        baseURL: process.env.REACT_APP_API_URL || 'localhost:4000',
+        baseURL: process.env.REACT_APP_API_URL || 'http://localhost:4000',
     })
 
-export const getGame = (gameId: string): AxiosPromise =>
-    genericAction<Game>({ method: 'get', url: `/game/${gameId}` })
+export const getGame = (gameId?: string | null): AxiosPromise<Game> =>
+    genericAction({ method: 'get', url: `/game/${gameId}` })
 
-export const createGame = (userName: string): AxiosPromise =>
-    genericAction<Game>({ method: 'post', url: '/game', data: { userName } })
+export const createGame = (userName: string): AxiosPromise<Game> =>
+    genericAction({ method: 'post', url: '/game', data: { userName } })
 
-export const updateGame = (data: UpdateGameParams): AxiosPromise =>
-    genericAction<UpdateResponse>({ method: 'patch', url: '/game', data })
+export const updateGame = (
+    data: UpdateGameParams
+): AxiosPromise<UpdateResponse> =>
+    genericAction({ method: 'patch', url: '/game', data })

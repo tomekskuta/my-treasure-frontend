@@ -11,9 +11,8 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <ThemeProvider theme={theme}>
-                <GlobalStyles>
-                    <App />
-                </GlobalStyles>
+                <GlobalStyles />
+                <App />
             </ThemeProvider>
         </Provider>
     </React.StrictMode>,

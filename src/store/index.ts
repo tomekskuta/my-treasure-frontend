@@ -1,9 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit'
-import gameSlide from './game'
+
+import gameStage from './gameStage'
+import game, { GameStore } from './game'
+import topScores from './topScores'
+
+export interface Store {
+    gameStage: GameStages
+    game: GameStore
+    topScores: TopScores
+}
 
 const store = configureStore({
     reducer: {
-        game: gameSlide.reducer,
+        gameStage: gameStage.reducer,
+        game: game.reducer,
+        topScores: topScores.reducer,
     },
 })
 

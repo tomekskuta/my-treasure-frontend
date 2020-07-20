@@ -1,17 +1,54 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState: Game = {
-    id: '',
-    userName: '',
-    score: 0,
-    finished: false,
-    revealedFields: [],
+import getGame from './getGame'
+import createGame from './createGame'
+
+export interface GameStore {
+    loading: boolean
+    data: Game
 }
 
-const gameSlice = createSlice<Game, {}>({
+const initialState: GameStore = {
+    loading: true,
+    data: {
+        id: '',
+        userName: '',
+        score: 0,
+        finished: false,
+        revealedFields: [],
+    },
+}
+
+const pending = (state: GameStore): GameStore => ({
+    loading: true,
+    data: state.data,
+})
+
+const fulfilled = (
+    state: GameStore,
+    action: PayloadAction<Game>
+): GameStore => ({
+    loading: false,
+    data: action.payload,
+})
+
+const rejected = (state: GameStore): GameStore => ({
+    loading: false,
+    data: state.data,
+})
+
+const gameSlice = createSlice<GameStore, {}>({
     name: 'game',
     initialState,
     reducers: {},
+    extraReducers: (builder) =>
+        builder
+            .addCase(getGame.pending, pending)
+            .addCase(getGame.fulfilled, fulfilled)
+            .addCase(getGame.rejected, rejected)
+            .addCase(createGame.pending, pending)
+            .addCase(createGame.fulfilled, fulfilled)
+            .addCase(createGame.rejected, rejected),
 })
 
 export default gameSlice

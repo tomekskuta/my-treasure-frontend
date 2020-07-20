@@ -1,23 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  )
+import getGame from 'store/game/getGame'
+
+import {
+    Layout,
+    InitStage,
+    CreateStage,
+    PlayStage,
+    FinishStage,
+} from 'components'
+
+const GameStages: Record<GameStages, React.FC> = {
+    init: InitStage,
+    create: CreateStage,
+    play: PlayStage,
+    finish: FinishStage,
+}
+
+const App: React.FC = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getGame())
+    }, [])
+
+    const currentStage = useSelector((state) => state.gameStage)
+
+    const CurrentStageComponent = GameStages[currentStage]
+
+    return (
+        <Layout>
+            <CurrentStageComponent />
+        </Layout>
+    )
 }
 
 export default App

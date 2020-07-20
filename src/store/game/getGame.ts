@@ -1,0 +1,31 @@
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { getGame } from 'fetchActions'
+import { setStage } from 'store/gameStage'
+import { gameIdLocalStorage } from 'utils/localStorage'
+
+const getGameAction = createAsyncThunk(
+    'game/getGameAction',
+    async (_, thunkAPI) => {
+        const { dispatch, rejectWithValue } = thunkAPI
+
+        const gameId = gameIdLocalStorage.get()
+
+        const throwError = (error?: string) => {
+            dispatch(setStage('create'))
+            return rejectWithValue(error)
+        }
+
+        if (!gameId) {
+            return throwError()
+        }
+
+        try {
+            const response = await getGame(gameId)
+            return response.data
+        } catch (error) {
+            return throwError()
+        }
+    }
+)
+
+export default getGameAction
