@@ -1,9 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { tabletPortrait } from 'styles/mediaQueries'
+
 const LayoutWrapper = styled.div`
     padding: 25px;
-    width: 100%;
+
+    @media ${tabletPortrait} {
+        padding: 50px;
+    }
 `
 
 const Layout: React.FC = (props) => {
