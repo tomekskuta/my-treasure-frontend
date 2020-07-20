@@ -1,19 +1,15 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import styled from 'styled-components'
 
-import Loader from '../Loader'
+const LayoutWrapper = styled.div`
+    padding: 25px;
+    width: 100%;
+`
 
 const Layout: React.FC = (props) => {
     const { children } = props
 
-    const loading = useSelector((state) => state.game.loading)
-
-    return (
-        <div>
-            {loading && <Loader />}
-            {children}
-        </div>
-    )
+    return <LayoutWrapper>{children}</LayoutWrapper>
 }
 
 export default Layout

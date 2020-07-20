@@ -15,9 +15,11 @@ const mediaQueries: MediaQueries = Object.entries(breakpoint).reduce(
 )
 
 export enum color {
+    black = '#000000',
     red = '#931621',
     darkBlue = '#28464B',
     blue = '#2C8C99',
+    yellow = '#f1c40f',
 }
 
 export interface Theme {
