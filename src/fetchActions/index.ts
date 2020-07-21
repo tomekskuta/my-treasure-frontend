@@ -2,7 +2,7 @@ import axios, { AxiosPromise, Method } from 'axios'
 
 export interface UpdateGameParams {
     id: string
-    revealedFields: Coordinates[]
+    revealedFields: FieldCoordinates[]
 }
 
 interface UpdateResponse extends Game {

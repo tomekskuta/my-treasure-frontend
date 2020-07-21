@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import getGame from './getGame'
 import createGame from './createGame'
+import updateGame from './updateGame'
 
 export interface GameStore {
     loading: boolean
@@ -48,7 +49,10 @@ const gameSlice = createSlice<GameStore, {}>({
             .addCase(getGame.rejected, rejected)
             .addCase(createGame.pending, pending)
             .addCase(createGame.fulfilled, fulfilled)
-            .addCase(createGame.rejected, rejected),
+            .addCase(createGame.rejected, rejected)
+            .addCase(updateGame.pending, pending)
+            .addCase(updateGame.fulfilled, fulfilled)
+            .addCase(updateGame.rejected, rejected),
 })
 
 export default gameSlice

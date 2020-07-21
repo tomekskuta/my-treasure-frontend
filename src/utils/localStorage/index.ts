@@ -1,15 +1,15 @@
-const generateLocalStorage = <T>(name: string) => ({
-    get: (): T | null => {
+const generateLocalStorage = <T>(name: string, defaultValue: T) => ({
+    get: (): T => {
         const value = window.localStorage.getItem(name)
-        return value ? JSON.parse(value) : null
+        return value ? JSON.parse(value) : defaultValue
     },
     set: (value: T): void =>
         window.localStorage.setItem(name, JSON.stringify(value)),
 })
 
-export const gameIdLocalStorage = generateLocalStorage<string>(
-    'my-treasure-gameId'
-)
-export const userNameLocalStorage = generateLocalStorage<string>(
-    'my-treasure-userName'
+export const gameIdLocalStorage = generateLocalStorage('my-treasure-gameId', '')
+
+export const userNameLocalStorage = generateLocalStorage(
+    'my-treasure-userName',
+    ''
 )

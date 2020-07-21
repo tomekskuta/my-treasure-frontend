@@ -20,6 +20,11 @@ export enum color {
     darkBlue = '#28464B',
     blue = '#2C8C99',
     yellow = '#f1c40f',
+
+    status = '#764134',
+    covered = '#ad8350',
+    empty = '#cfc7a0',
+    checked = '#2a1a1f',
 }
 
 export interface Theme {

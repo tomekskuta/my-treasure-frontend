@@ -9,6 +9,7 @@ interface PlayHeader {
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-bottom: 40px;
 
     & > div {
         max-width: 50%;
