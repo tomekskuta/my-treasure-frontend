@@ -27,7 +27,6 @@ const CreateStage = forwardRef<HTMLInputElement, CreateStage>(
 
         return (
             <Wrapper>
-                {loading && <Loader />}
                 <Form onSubmit={handleSubmit}>
                     <Input
                         ref={ref}
@@ -37,7 +36,7 @@ const CreateStage = forwardRef<HTMLInputElement, CreateStage>(
                         onChange={onChange}
                         error={error}
                     />
-                    <Button type="submit">Play</Button>
+                    <Button loading={loading}>Play</Button>
                 </Form>
             </Wrapper>
         )

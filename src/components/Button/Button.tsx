@@ -1,11 +1,32 @@
+import React from 'react'
 import styled from 'styled-components'
 
-const Button = styled.button<{ loading?: boolean }>`
+import Treasure from 'components/Treasure'
+
+interface Button {
+    loading?: boolean
+}
+
+const Button = styled.button.attrs<Button>((props) => ({
+    children: props.loading ? (
+        <>
+            <Treasure width={[10, 'px']} />
+            <Treasure width={[10, 'px']} />
+            <Treasure width={[10, 'px']} />
+        </>
+    ) : (
+        props.children
+    ),
+    disabled: props.disabled || props.loading,
+}))<Button>`
     background-color: transparent;
     border-radius: 0;
     border: 2px solid ${({ theme }) => theme.colors.blue};
     color: ${({ theme }) => theme.colors.darkBlue};
     padding: 15px 30px;
+    width: ${({ loading }) => (loading ? '140px' : 'auto')};
+    display: flex;
+    justify-content: space-between;
     font-size: 20px;
     font-weight: 600;
     text-transform: uppercase;
@@ -15,7 +36,7 @@ const Button = styled.button<{ loading?: boolean }>`
 
     &:disabled {
         pointer-events: none;
-        opacity: 0.5;
+        opacity: ${({ loading }) => (loading ? 1 : 0.5)};
     }
 
     &:focus {

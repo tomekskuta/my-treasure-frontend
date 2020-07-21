@@ -12,7 +12,6 @@ interface PlayStage {
 }
 
 const CheckButton = styled((props) => <Button {...props} />)`
-    display: block;
     margin: 50px auto 0;
 `
 
