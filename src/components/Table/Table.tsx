@@ -14,6 +14,7 @@ const StyledTable = styled.table`
     border: 2px solid ${({ theme }) => theme.colors.darkBlue};
     color: ${({ theme }) => theme.colors.darkBlue};
     border-spacing: 0;
+    overflow-x: auto;
 `
 
 const Td = styled.td<{ currentPlayer?: boolean }>`

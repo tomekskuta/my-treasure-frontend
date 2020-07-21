@@ -30,7 +30,7 @@ const H2 = styled.h2`
 `
 
 const PlayAgainButton = styled((props) => <Button {...props} />)`
-    margin: 50px auto 0;
+    margin: 50px auto;
 `
 
 const FinishStage: React.FC<FinishStage> = (props) => {

@@ -36,7 +36,9 @@ const CreateStage = forwardRef<HTMLInputElement, CreateStage>(
                         onChange={onChange}
                         error={error}
                     />
-                    <Button loading={loading}>Play</Button>
+                    <Button disabled={!!error} loading={loading}>
+                        Play
+                    </Button>
                 </Form>
             </Wrapper>
         )
