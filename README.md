@@ -5,7 +5,7 @@ To launch app, first follow instructions from [backend](https://github.com/tomek
 then clone the repo:
 
 ```bash
-git clone https://github.com/tomekskuta/luxoft-my-treasure-frontend.git
+git clone https://github.com/tomekskuta/my-treasure-frontend.git
 ```
 
 install packages:
