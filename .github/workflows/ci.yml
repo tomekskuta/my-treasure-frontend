@@ -1,0 +1,44 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: CI/CD
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.4.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+      - name: Setup known_hosts
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+          check-latest: true
+      - name: Install dependencies
+        run: yarn
+      - name: Build production bundle
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+        run: yarn build
+      - name: Sync project files
+        env:
+          HOST_NAME: ${{ secrets.HOST_NAME }}
+          HOST_ADDRESS: ${{ secrets.HOST_ADDRESS }}
+          HOST_PATH: ${{ secrets.HOST_PATH }}
+        run: rsync -avzr --delete ${GITHUB_WORKSPACE}/public/ "$HOST_NAME"@"$HOST_ADDRESS":"$HOST_PATH"
