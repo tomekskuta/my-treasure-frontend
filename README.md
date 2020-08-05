@@ -32,4 +32,4 @@ App starts on `3000` port as default.
 
 ### Env vars
 
--   REACT_APP_API_URL - Url to api (default on `localhost:4000`)
+-   `REACT_APP_API_URL` - Url to API (default on `localhost:4000`)
