@@ -26,7 +26,7 @@ yarn start
 npm start
 ```
 
-App starts on `3000` port as default.
+App starts on `localhost:3000` as default.
 
 ---
 
