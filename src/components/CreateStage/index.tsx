@@ -41,6 +41,7 @@ const CreateStageContainer = () => {
         rememberedName && setFieldValue('userName', rememberedName)
 
         inputRef.current?.focus()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

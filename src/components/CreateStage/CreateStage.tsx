@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 
-import { Input, Button, Loader } from 'components'
+import { Input, Button } from 'components'
 
 interface CreateStage {
     loading: boolean

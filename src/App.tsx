@@ -23,6 +23,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         dispatch(getGame())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const currentStage = useSelector((state) => state.gameStage)
