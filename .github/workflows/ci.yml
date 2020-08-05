@@ -41,4 +41,4 @@ jobs:
           HOST_NAME: ${{ secrets.HOST_NAME }}
           HOST_ADDRESS: ${{ secrets.HOST_ADDRESS }}
           HOST_PATH: ${{ secrets.HOST_PATH }}
-        run: rsync -avzr --delete ${GITHUB_WORKSPACE}/public/ "$HOST_NAME"@"$HOST_ADDRESS":"$HOST_PATH"
+        run: rsync -avzr --delete ${GITHUB_WORKSPACE}/build/ "$HOST_NAME"@"$HOST_ADDRESS":"$HOST_PATH"
